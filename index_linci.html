@@ -1,0 +1,2029 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LINCI – Ingeniería y Líneas S.A.S</title>
+  <meta name="description" content="Ingeniería y Líneas LINCI S.A.S — Más de 20 años desarrollando y ejecutando proyectos de infraestructura eléctrica, civil y mecánica en Colombia y Latinoamérica." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================
+       TOKENS & RESET
+    ============================================ */
+    :root {
+      --navy:       #01354b;
+      --navy-light: #01435e;
+      --blue:       #009cdc;
+      --blue-dark:  #007db3;
+      --white:      #ffffff;
+      --off-white:  #f4f8fb;
+      --gray:       #6b7a8d;
+      --gray-light: #e8edf2;
+      --text:       #1a2a35;
+      --radius:     12px;
+      --shadow:     0 4px 24px rgba(1,53,75,0.10);
+      --shadow-lg:  0 8px 40px rgba(1,53,75,0.16);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      font-size: 16px;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ============================================
+       TYPOGRAPHY HELPERS
+    ============================================ */
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--navy);
+    }
+    .section-title span { color: var(--blue); }
+
+    .section-title--white { color: var(--white); }
+    .section-title--white span { color: var(--blue); }
+
+    .section-body {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--gray);
+      max-width: 640px;
+    }
+    .section-body--white { color: rgba(255,255,255,0.80); }
+
+    /* ============================================
+       BUTTONS
+    ============================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.75rem;
+      border-radius: 6px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.2s ease;
+    }
+    .btn-primary {
+      background: var(--blue);
+      color: var(--white);
+      border-color: var(--blue);
+    }
+    .btn-primary:hover { background: var(--blue-dark); border-color: var(--blue-dark); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--white);
+      border-color: rgba(255,255,255,0.6);
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.12); border-color: var(--white); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--navy);
+      border-color: var(--navy);
+    }
+    .btn-outline:hover { background: var(--navy); color: var(--white); }
+
+    /* ============================================
+       LAYOUT
+    ============================================ */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+    .section { padding: 96px 0; }
+    .section--sm { padding: 64px 0; }
+    .section--dark { background: var(--navy); }
+    .section--soft { background: var(--off-white); }
+
+    /* ============================================
+       NAV
+    ============================================ */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      transition: background 0.3s, box-shadow 0.3s, padding 0.3s;
+      padding: 1.2rem 0;
+    }
+    #nav.scrolled {
+      background: var(--navy);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.25);
+      padding: 0.75rem 0;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .nav-logo img {
+      height: 44px;
+      width: auto;
+    }
+    /* Fallback text logo while image loads */
+    .nav-logo-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: 0.05em;
+    }
+    .nav-logo-text span { color: var(--blue); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .nav-links a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--blue); }
+
+    .nav-cta .btn { padding: 0.55rem 1.25rem; font-size: 0.9rem; }
+
+    /* Hamburger */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 26px; height: 2.5px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* Mobile nav */
+    .nav-mobile {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      background: var(--navy);
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      padding: 1rem 0;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--white);
+      padding: 0.8rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav-mobile a:hover { color: var(--blue); background: rgba(255,255,255,0.04); }
+
+    /* ============================================
+       HERO
+    ============================================ */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('hero.jpg') center center / cover no-repeat;
+      background-color: var(--navy-light); /* fallback mientras carga la imagen */
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        105deg,
+        rgba(1, 53, 75, 0.88) 0%,
+        rgba(1, 53, 75, 0.65) 55%,
+        rgba(0, 156, 220, 0.20) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 1.25rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px; height: 2px;
+      background: var(--blue);
+    }
+
+    .hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.0;
+      color: var(--white);
+      margin-bottom: 1.25rem;
+      text-align: left;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--blue);
+    }
+
+    /* ---- animated word ---- */
+    .hero-word-wrap {
+      display: inline-block;
+      position: relative;
+      min-width: 260px;
+    }
+    .hero-word {
+      display: inline-block;
+      color: var(--blue);
+      position: relative;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      white-space: nowrap;
+    }
+    .hero-word.out {
+      opacity: 0;
+      transform: translateY(-22px);
+      pointer-events: none;
+    }
+    .hero-word.in {
+      opacity: 0;
+      transform: translateY(22px);
+    }
+    /* underline accent that follows the word */
+    .hero-word::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -4px;
+      height: 3px;
+      background: var(--blue);
+      width: 100%;
+      transform: scaleX(1);
+      transform-origin: left;
+      transition: width 0.35s ease 0.1s;
+    }
+
+    /* hero eyebrow / sub / actions keep left alignment */
+    .hero-eyebrow, .hero-sub, .hero-actions { text-align: left; }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.82);
+      margin-bottom: 2rem;
+      max-width: 560px;
+    }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+      z-index: 2;
+    }
+    .hero-scroll svg { width: 20px; opacity: 0.6; }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ============================================
+       STATS BAR
+    ============================================ */
+    #stats {
+      background: var(--blue);
+      padding: 0;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .stat-item {
+      padding: 2rem 1.5rem;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.2);
+      transition: background 0.2s;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-item:hover { background: rgba(255,255,255,0.08); }
+    .stat-number {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+    .stat-number sup {
+      font-size: 1.4rem;
+      vertical-align: super;
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.4;
+      font-weight: 500;
+    }
+
+    /* ============================================
+       ABOUT — QUIÉNES SOMOS
+    ============================================ */
+    #about .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-image-wrap {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    .about-image-wrap img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      /* PLACEHOLDER — reemplazar about.jpg con la imagen real */
+      background: var(--navy-light);
+    }
+    .about-image-badge {
+      position: absolute;
+      bottom: -1.5rem;
+      right: -1.5rem;
+      background: var(--blue);
+      color: var(--white);
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .about-image-badge .badge-number {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+    .about-image-badge .badge-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      line-height: 1.3;
+      margin-top: 0.25rem;
+    }
+
+    .about-text { padding-right: 1rem; }
+    .about-text .section-body { margin: 1.25rem 0 2rem; }
+
+    .about-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .about-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1rem;
+      background: var(--off-white);
+      border-radius: 8px;
+      border-left: 3px solid var(--blue);
+    }
+    .about-feature-icon {
+      width: 36px; height: 36px;
+      flex-shrink: 0;
+      color: var(--blue);
+    }
+    .about-feature-text strong {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.2rem;
+    }
+    .about-feature-text span { font-size: 0.82rem; color: var(--gray); }
+
+    /* ============================================
+       MISIÓN / VISIÓN — ACORDEÓN INTERACTIVO
+    ============================================ */
+    #mision-vision {
+      background: var(--navy);
+      overflow: hidden;
+    }
+    .mv-intro {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .mv-hint {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+    }
+
+    .mv-accordion { display: flex; flex-direction: column; gap: 0; }
+
+    .mv-item {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+    .mv-item:last-child { border-bottom: 1px solid rgba(255,255,255,0.08); }
+
+    .mv-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem 0;
+      cursor: pointer;
+      user-select: none;
+      gap: 2rem;
+    }
+
+    .mv-word {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      line-height: 1;
+      color: rgba(255,255,255,0.12);
+      transition: color 0.35s, text-shadow 0.35s;
+    }
+    .mv-item.open .mv-word,
+    .mv-trigger:hover .mv-word {
+      color: var(--white);
+      text-shadow: 0 0 60px rgba(0,156,220,0.35);
+    }
+    .mv-item.open .mv-word { color: var(--blue); }
+
+    .mv-trigger-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-shrink: 0;
+    }
+    .mv-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      transition: color 0.3s;
+    }
+    .mv-item.open .mv-tag { color: var(--blue); }
+
+    .mv-chevron {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.4);
+      flex-shrink: 0;
+      transition: all 0.35s;
+    }
+    .mv-chevron svg { width: 18px; transition: transform 0.35s; }
+    .mv-item.open .mv-chevron {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: var(--white);
+    }
+    .mv-item.open .mv-chevron svg { transform: rotate(180deg); }
+
+    .mv-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+    .mv-item.open .mv-panel { max-height: 300px; }
+
+    .mv-panel-inner {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      align-items: start;
+    }
+    .mv-panel-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue);
+      padding-top: 0.25rem;
+    }
+    .mv-panel-body {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.75);
+    }
+
+    /* ============================================
+       VALORES — CONSTELACIÓN
+    ============================================ */
+    #valores { background: #020e14; }
+    #valores .section-title { color: var(--white); }
+
+    .constellation-wrap {
+      position: relative;
+      height: 310px;
+      margin-top: 3rem;
+    }
+    .constellation-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      overflow: visible;
+    }
+    .const-line {
+      stroke: rgba(0,156,220,0.15);
+      stroke-width: 0.8;
+    }
+
+    .valor-node {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+    .valor-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 0 3px rgba(0,156,220,0.15), 0 0 12px rgba(0,156,220,0.4);
+      cursor: default;
+      transition: transform 0.25s, box-shadow 0.25s;
+      position: relative;
+      z-index: 2;
+      flex-shrink: 0;
+    }
+    .valor-node:hover .valor-dot {
+      transform: scale(1.9);
+      box-shadow: 0 0 0 5px rgba(0,156,220,0.25), 0 0 22px rgba(0,156,220,0.7);
+    }
+
+    /* always-visible label beside each dot */
+    .valor-label {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 18px;
+      white-space: nowrap;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      transition: color 0.2s;
+      pointer-events: none;
+      line-height: 1;
+    }
+    .valor-node.label-left .valor-label {
+      left: auto;
+      right: 18px;
+      text-align: right;
+    }
+    .valor-node:hover .valor-label {
+      color: var(--blue);
+    }
+
+    /* Mobile: list */
+    @media (max-width: 768px) {
+      .constellation-wrap { display: none; }
+      .constellation-mobile { display: flex !important; }
+    }
+    .constellation-mobile {
+      display: none;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+    .constellation-mobile-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+    }
+    .constellation-mobile-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--blue);
+      flex-shrink: 0;
+      box-shadow: 0 0 8px rgba(0,156,220,0.5);
+    }
+    .constellation-mobile-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .constellation-mobile-desc {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* ============================================
+       SERVICIOS — LISTA + PANEL DE IMAGEN
+    ============================================ */
+    #servicios { background: var(--navy); }
+
+    .servicios-header { text-align: center; margin-bottom: 3.5rem; }
+    .servicios-header .section-body { margin: 1rem auto 0; }
+
+    .servicios-list-wrap {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    .servicios-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .servicio-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.1rem;
+      padding: 1.1rem 0.9rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      cursor: default;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .servicio-item:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
+    .servicio-item:hover,
+    .servicio-item.active {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .servicio-item-icon {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      background: rgba(0,156,220,0.12);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      color: var(--blue);
+      transition: background 0.2s, color 0.2s;
+    }
+    .servicio-item:hover .servicio-item-icon,
+    .servicio-item.active .servicio-item-icon {
+      background: var(--blue);
+      color: var(--white);
+    }
+    .servicio-item-icon svg { width: 20px; }
+
+    .servicio-item-text { flex: 1; min-width: 0; }
+    .servicio-item-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+      margin-bottom: 0.3rem;
+    }
+    .servicio-item-desc {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.6;
+      transition: color 0.2s;
+    }
+    .servicio-item:hover .servicio-item-desc,
+    .servicio-item.active .servicio-item-desc {
+      color: rgba(255,255,255,0.72);
+    }
+
+    .servicios-img-panel {
+      position: sticky;
+      top: 100px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      background: #01435e;
+    }
+    .servicios-img-panel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.3s ease;
+    }
+
+    /* ============================================
+       CERTIFICACIONES
+    ============================================ */
+    #certificaciones { background: var(--off-white); }
+    .cert-inner {
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+    }
+    .cert-text { flex: 1; }
+    .cert-text .section-body { margin: 1.25rem 0 2rem; }
+    .cert-badges {
+      display: flex;
+      gap: 1.5rem;
+      flex: 1;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .cert-badge {
+      background: var(--white);
+      border: 2px solid var(--gray-light);
+      border-radius: var(--radius);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      min-width: 130px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .cert-badge:hover { border-color: var(--blue); transform: translateY(-3px); }
+    .cert-badge-norm {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--blue);
+      letter-spacing: 0.05em;
+    }
+    .cert-badge-name {
+      font-size: 0.78rem;
+      color: var(--gray);
+      margin-top: 0.3rem;
+      line-height: 1.4;
+    }
+    .cert-badge-year {
+      font-size: 0.72rem;
+      color: var(--gray);
+      margin-top: 0.2rem;
+    }
+
+    /* ============================================
+       EXPERIENCIA / CLIENTES — CARRUSEL
+    ============================================ */
+    #experiencia .exp-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+      gap: 2rem;
+    }
+    .exp-controls {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .exp-btn {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 2px solid var(--navy);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--navy);
+    }
+    .exp-btn:hover { background: var(--navy); color: var(--white); }
+    .exp-btn svg { width: 18px; height: 18px; }
+
+    .carousel-track-wrap { overflow: hidden; border-radius: var(--radius); }
+    .carousel-track {
+      display: flex;
+      gap: 1.5rem;
+      transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+    }
+    .exp-slide {
+      min-width: calc(33.333% - 1rem);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+    .exp-slide img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      /* PLACEHOLDER — reemplazar exp-01.jpg … exp-N.jpg con imágenes reales */
+      background: var(--navy-light);
+    }
+    .exp-slide-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(1,53,75,0.85) 0%, transparent 55%);
+      display: flex;
+      align-items: flex-end;
+      padding: 1.25rem;
+    }
+    .exp-slide-caption {
+      color: var(--white);
+    }
+    .exp-slide-client {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.25rem;
+    }
+    .exp-slide-desc { font-size: 0.82rem; line-height: 1.4; color: rgba(255,255,255,0.85); }
+
+    /* Clients logo grid */
+    .clients-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray);
+      text-align: center;
+      margin: 4rem 0 2rem;
+    }
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+      align-items: center;
+    }
+    .client-logo {
+      background: var(--off-white);
+      border: 1px solid var(--gray-light);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      text-align: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .client-logo:hover { border-color: var(--blue); color: var(--blue); }
+
+    /* ============================================
+       COBERTURA
+    ============================================ */
+    #cobertura { background: var(--navy); }
+    .cobertura-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .cobertura-map {
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cobertura-map-placeholder {
+      text-align: center;
+      color: rgba(255,255,255,0.4);
+    }
+    .cobertura-map-placeholder svg { width: 64px; margin-bottom: 1rem; opacity: 0.5; }
+    .cobertura-map-placeholder p { font-size: 0.9rem; }
+    /* PLACEHOLDER — reemplazar por: <img src="mapa-cobertura.jpg" alt="Cobertura LINCI"> */
+
+    .cobertura-text .section-title { margin-bottom: 1.25rem; }
+    .cobertura-text .section-body { margin-bottom: 2rem; }
+
+    .cobertura-list { display: flex; flex-direction: column; gap: 0.75rem; }
+    .cobertura-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1.25rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 8px;
+      color: var(--white);
+    }
+    .cobertura-item svg { width: 18px; flex-shrink: 0; color: var(--blue); }
+    .cobertura-item strong { font-weight: 600; }
+    .cobertura-item span { font-size: 0.88rem; color: rgba(255,255,255,0.70); }
+
+    /* ============================================
+       CONTACTO
+    ============================================ */
+    #contacto { background: var(--off-white); padding: 72px 0; }
+    .contacto-head {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .contacto-head .section-body {
+      margin: 1rem auto 0;
+      text-align: center;
+    }
+
+    .contacto-items {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .contacto-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.85rem;
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.75rem 1.25rem;
+      box-shadow: var(--shadow);
+    }
+    .contacto-item-icon {
+      width: 52px; height: 52px;
+      flex-shrink: 0;
+      background: var(--blue);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+    }
+    .contacto-item-icon svg { width: 24px; height: 24px; }
+    .contacto-item-text strong {
+      display: block;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--gray);
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+    .contacto-item-text a,
+    .contacto-item-text span {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.4;
+    }
+    .contacto-item-text a:hover { color: var(--blue); }
+
+    .contacto-cta {
+      text-align: center;
+    }
+
+    /* ============================================
+       FOOTER
+    ============================================ */
+    #footer {
+      background: #011e2b;
+      padding: 4rem 0 2rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-brand .footer-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .footer-brand .footer-logo img {
+      height: 40px;
+      width: auto;
+    }
+    .footer-brand p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+      max-width: 280px;
+    }
+    .footer-social {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    .footer-social a {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.20);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.60);
+      transition: all 0.2s;
+    }
+    .footer-social a:hover { border-color: var(--blue); color: var(--blue); background: rgba(0,156,220,0.10); }
+    .footer-social svg { width: 16px; height: 16px; }
+
+    .footer-col h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--white);
+      margin-bottom: 1.25rem;
+    }
+    .footer-col ul li { margin-bottom: 0.65rem; }
+    .footer-col ul li a {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.55);
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: var(--blue); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 2rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .footer-bottom p { font-size: 0.82rem; color: rgba(255,255,255,0.35); }
+    .footer-bottom a { color: rgba(255,255,255,0.45); transition: color 0.2s; }
+    .footer-bottom a:hover { color: var(--blue); }
+
+    /* ============================================
+       RESPONSIVE
+    ============================================ */
+    @media (max-width: 1024px) {
+      .servicios-list-wrap { grid-template-columns: 1fr 300px; gap: 1.5rem; }
+      .clients-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .section { padding: 64px 0; }
+      #hero { height: 70vh; min-height: 480px; }
+
+      .nav-links, .nav-cta { display: none; }
+      .nav-toggle { display: flex; }
+
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item { border-bottom: 1px solid rgba(255,255,255,0.2); }
+      .stat-item:nth-child(even) { border-right: none; }
+
+      #about .about-grid { grid-template-columns: 1fr; }
+      .about-image-wrap { order: -1; }
+      .about-image-wrap img { height: 280px; }
+      .about-image-badge { display: none; }
+
+      .mv-grid { grid-template-columns: 1fr; }
+
+      .servicios-list-wrap { grid-template-columns: 1fr; }
+      .servicios-img-panel { display: none; }
+
+      .cert-inner { flex-direction: column; gap: 2rem; }
+      .exp-slide { min-width: calc(100% - 0px); }
+
+      .cobertura-grid { grid-template-columns: 1fr; }
+      .cobertura-map { display: none; }
+
+      .contacto-grid { max-width: 100%; }
+
+      .clients-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== NAV ==================== -->
+  <header id="nav">
+    <div class="container">
+      <nav class="nav-inner">
+        <a href="#hero" class="nav-logo" aria-label="LINCI inicio">
+          <!-- PLACEHOLDER: reemplazar con img src="logo-dark.png" cuando esté disponible -->
+          <img src="logo-dark.png" alt="LINCI – Ingeniería y Líneas"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+          <span class="nav-logo-text" style="display:none">LIN<span>CI</span></span>
+        </a>
+
+        <ul class="nav-links" role="list">
+          <li><a href="#about">Quiénes Somos</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#experiencia">Experiencia</a></li>
+          <li><a href="#cobertura">Cobertura</a></li>
+        </ul>
+
+        <div class="nav-cta">
+          <a href="#contacto" class="btn btn-primary">Contáctanos</a>
+        </div>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+
+      <ul class="nav-mobile" id="navMobile" role="list">
+        <li><a href="#about">Quiénes Somos</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#experiencia">Experiencia</a></li>
+        <li><a href="#cobertura">Cobertura</a></li>
+        <li><a href="#contacto">Contáctanos</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ==================== HERO ==================== -->
+  <section id="hero">
+    <!-- IMAGEN DE FONDO HERO: guarda tu foto con el nombre "hero.jpg" en la misma carpeta -->
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="container">
+      <div class="hero-content">
+        <p class="hero-eyebrow">Desde 2002 · Barranquilla, Colombia</p>
+        <h1 class="hero-title">
+          Ingeniería<br>
+          que <span class="hero-word-wrap"><span class="hero-word" id="heroWord">Energiza</span></span><br>
+          Colombia
+        </h1>
+        <p class="hero-sub">
+          Trabajamos para que la energía llegue de forma segura y confiable
+          a más comunidades. Más de 20 años ejecutando proyectos de infraestructura
+          eléctrica, civil y mecánica en Colombia y Latinoamérica.
+        </p>
+        <div class="hero-actions">
+          <a href="#servicios" class="btn btn-primary">Nuestros Servicios</a>
+          <a href="#contacto" class="btn btn-ghost">Contáctanos</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </div>
+  </section>
+
+  <!-- ==================== STATS BAR ==================== -->
+  <section id="stats" aria-label="Cifras clave">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">+20</div>
+        <div class="stat-label">Años de<br>experiencia</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">+400<sup>km</sup></div>
+        <div class="stat-label">Líneas de transmisión<br>construidas</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">+40<sup>mil</sup></div>
+        <div class="stat-label">Usuarios<br>normalizados</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">3</div>
+        <div class="stat-label">Certificaciones<br>ISO vigentes</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ABOUT ==================== -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image-wrap">
+          <!-- PLACEHOLDER: reemplazar about.jpg con imagen real (instalaciones / equipo) -->
+          <img src="about.jpg" alt="Equipo LINCI en campo"
+               onerror="this.style.background='#01354b';this.alt=''" />
+          <div class="about-image-badge">
+            <div class="badge-number">2002</div>
+            <div class="badge-label">Año de<br>fundación</div>
+          </div>
+        </div>
+
+        <div class="about-text">
+          <p class="section-label">Quiénes Somos</p>
+          <h2 class="section-title">Ingeniería de<br><span>Alta Tensión</span> con<br>Respaldo Probado</h2>
+          <p class="section-body">
+            <strong>Ingeniería y Líneas LINCI S.A.S</strong> es una empresa colombiana constituida en 2002,
+            dedicada al desarrollo y ejecución de proyectos de construcción y mantenimiento de obras
+            de infraestructura en los campos de la ingeniería eléctrica, civil y mecánica para los
+            sectores energético, industrial, telecomunicaciones, minería e hidrocarburos.
+          </p>
+          <p class="section-body">
+            En LINCI trabajamos para que la energía llegue de forma segura y confiable
+            a más comunidades. Con más de 400 km de líneas construidas y más de 40.000 usuarios
+            normalizados, somos aliados estratégicos del desarrollo energético de Colombia.
+          </p>
+
+          <div class="about-features">
+            <div class="about-feature">
+              <div class="about-feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              </div>
+              <div class="about-feature-text">
+                <strong>Certificados PMI®</strong>
+                <span>Gestión de proyectos bajo estándar internacional</span>
+              </div>
+            </div>
+            <div class="about-feature">
+              <div class="about-feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+              </div>
+              <div class="about-feature-text">
+                <strong>Cobertura Internacional</strong>
+                <span>Operaciones en Colombia y Ciudad de Panamá</span>
+              </div>
+            </div>
+            <div class="about-feature">
+              <div class="about-feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div class="about-feature-text">
+                <strong>Triple Certificación ISO</strong>
+                <span>Calidad, Seguridad y Medio Ambiente</span>
+              </div>
+            </div>
+            <div class="about-feature">
+              <div class="about-feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div class="about-feature-text">
+                <strong>Equipo Especializado</strong>
+                <span>Ingenieros expertos en alta, media y baja tensión</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MISIÓN / VISIÓN ==================== -->
+  <section id="mision-vision" class="section">
+    <div class="container">
+      <div class="mv-intro">
+        <p class="section-label">Propósito</p>
+        <p class="mv-hint">Haz clic para explorar</p>
+      </div>
+
+      <div class="mv-accordion">
+
+        <!-- MISIÓN -->
+        <div class="mv-item" id="mvMision">
+          <div class="mv-trigger" onclick="toggleMV('mvMision')">
+            <span class="mv-word">MISIÓN</span>
+            <div class="mv-trigger-right">
+              <span class="mv-tag">Nuestro propósito diario</span>
+              <span class="mv-chevron">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </div>
+          </div>
+          <div class="mv-panel">
+            <div class="mv-panel-inner">
+              <p class="mv-panel-label">¿Qué hacemos?</p>
+              <p class="mv-panel-body">
+                Desarrollar y ejecutar proyectos de infraestructura eléctrica, civil y mecánica con los más
+                altos estándares de calidad, seguridad y gestión ambiental, contribuyendo al desarrollo
+                energético e industrial de Colombia y la región, con un equipo humano competente,
+                innovador y comprometido con la excelencia.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- VISIÓN -->
+        <div class="mv-item" id="mvVision">
+          <div class="mv-trigger" onclick="toggleMV('mvVision')">
+            <span class="mv-word">VISIÓN</span>
+            <div class="mv-trigger-right">
+              <span class="mv-tag">Hacia dónde vamos</span>
+              <span class="mv-chevron">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </div>
+          </div>
+          <div class="mv-panel">
+            <div class="mv-panel-inner">
+              <p class="mv-panel-label">¿A dónde vamos?</p>
+              <p class="mv-panel-body">
+                Ser reconocidos para 2030 como empresa líder en ingeniería de infraestructura eléctrica
+                en Colombia y Latinoamérica, consolidando nuestra presencia nacional e internacional con
+                proyectos de alto impacto, innovación tecnológica y prácticas sostenibles que generen
+                valor para nuestros clientes, colaboradores y la sociedad.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== VALORES — CONSTELACIÓN ==================== -->
+  <section id="valores" class="section">
+    <div class="container">
+      <div style="text-align:center; max-width:600px; margin:0 auto 0">
+        <p class="section-label">Nuestros Valores</p>
+        <h2 class="section-title">Los Principios que<br><span>Guían</span> Nuestro Trabajo</h2>
+      </div>
+
+      <!-- Constellation desktop -->
+      <div class="constellation-wrap" id="constellation">
+        <!-- SVG lines drawn by JS -->
+        <svg class="constellation-svg" id="constSvg" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
+
+        <!-- Nodes: data-x and data-y in % | label-left = label goes to left of dot -->
+        <div class="valor-node" data-x="13" data-y="16" data-id="n1">
+          <div class="valor-dot"></div>
+          <span class="valor-label">Resp. Social</span>
+        </div>
+
+        <div class="valor-node" data-x="42" data-y="8" data-id="n2">
+          <div class="valor-dot"></div>
+          <span class="valor-label">Respeto</span>
+        </div>
+
+        <div class="valor-node label-left" data-x="78" data-y="14" data-id="n3">
+          <div class="valor-dot"></div>
+          <span class="valor-label">Innovación</span>
+        </div>
+
+        <div class="valor-node" data-x="26" data-y="50" data-id="n4">
+          <div class="valor-dot"></div>
+          <span class="valor-label">Trabajo en Equipo</span>
+        </div>
+
+        <div class="valor-node label-left" data-x="58" data-y="42" data-id="n5">
+          <div class="valor-dot"></div>
+          <span class="valor-label">Transparencia</span>
+        </div>
+
+        <div class="valor-node label-left" data-x="86" data-y="52" data-id="n6">
+          <div class="valor-dot"></div>
+          <span class="valor-label">Excelencia</span>
+        </div>
+
+        <div class="valor-node" data-x="18" data-y="82" data-id="n7">
+          <div class="valor-dot"></div>
+          <span class="valor-label">Sostenibilidad</span>
+        </div>
+
+        <div class="valor-node" data-x="48" data-y="88" data-id="n8">
+          <div class="valor-dot"></div>
+          <span class="valor-label">Ética Empresarial</span>
+        </div>
+
+        <div class="valor-node label-left" data-x="74" data-y="74" data-id="n9">
+          <div class="valor-dot"></div>
+          <span class="valor-label">Integridad</span>
+        </div>
+      </div>
+
+      <!-- Mobile fallback list -->
+      <div class="constellation-mobile">
+        <div class="constellation-mobile-item"><div class="constellation-mobile-dot"></div><div><div class="constellation-mobile-title">Responsabilidad Social</div><div class="constellation-mobile-desc">Comprometidos con las comunidades y el entorno.</div></div></div>
+        <div class="constellation-mobile-item"><div class="constellation-mobile-dot"></div><div><div class="constellation-mobile-title">Respeto</div><div class="constellation-mobile-desc">Valoramos a cada persona con dignidad y consideración.</div></div></div>
+        <div class="constellation-mobile-item"><div class="constellation-mobile-dot"></div><div><div class="constellation-mobile-title">Innovación</div><div class="constellation-mobile-desc">Adoptamos tecnologías modernas para soluciones eficientes.</div></div></div>
+        <div class="constellation-mobile-item"><div class="constellation-mobile-dot"></div><div><div class="constellation-mobile-title">Trabajo en Equipo</div><div class="constellation-mobile-desc">Colaboramos con sinergia para superar expectativas.</div></div></div>
+        <div class="constellation-mobile-item"><div class="constellation-mobile-dot"></div><div><div class="constellation-mobile-title">Transparencia</div><div class="constellation-mobile-desc">Honestidad y claridad en todas nuestras relaciones.</div></div></div>
+        <div class="constellation-mobile-item"><div class="constellation-mobile-dot"></div><div><div class="constellation-mobile-title">Excelencia</div><div class="constellation-mobile-desc">Calidad máxima en cada etapa de nuestros proyectos.</div></div></div>
+        <div class="constellation-mobile-item"><div class="constellation-mobile-dot"></div><div><div class="constellation-mobile-title">Sostenibilidad</div><div class="constellation-mobile-desc">Criterios ambientales y sociales en cada decisión.</div></div></div>
+        <div class="constellation-mobile-item"><div class="constellation-mobile-dot"></div><div><div class="constellation-mobile-title">Ética Empresarial</div><div class="constellation-mobile-desc">Cumplimos las normas legales y morales de nuestra actividad.</div></div></div>
+        <div class="constellation-mobile-item"><div class="constellation-mobile-dot"></div><div><div class="constellation-mobile-title">Integridad</div><div class="constellation-mobile-desc">Coherencia entre principios, decisiones y acciones.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SERVICIOS ==================== -->
+  <section id="servicios" class="section section--dark">
+    <div class="container">
+      <div class="servicios-header">
+        <p class="section-label">Lo Que Hacemos</p>
+        <h2 class="section-title section-title--white">Nuestros <span>Servicios</span></h2>
+        <p class="section-body section-body--white">
+          Soluciones integrales de ingeniería para el sector eléctrico, civil y de telecomunicaciones,
+          desde el diseño hasta la operación y mantenimiento.
+        </p>
+      </div>
+
+      <div class="servicios-list-wrap">
+
+        <!-- Lista de servicios -->
+        <div class="servicios-list" id="serviciosList">
+
+          <div class="servicio-item active" data-img="servicio-01.jpg">
+            <div class="servicio-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+            <div class="servicio-item-text">
+              <div class="servicio-item-title">Redes Eléctricas</div>
+              <p class="servicio-item-desc">Diseño, construcción y mantenimiento de redes eléctricas y líneas de transmisión desde baja tensión hasta <strong>230 kV</strong>.</p>
+            </div>
+          </div>
+
+          <div class="servicio-item" data-img="servicio-02.jpg">
+            <div class="servicio-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+            <div class="servicio-item-text">
+              <div class="servicio-item-title">Subestaciones Eléctricas</div>
+              <p class="servicio-item-desc">Diseño, construcción, mantenimiento y operación de subestaciones con niveles de <strong>tensión I a IV</strong>.</p>
+            </div>
+          </div>
+
+          <div class="servicio-item" data-img="servicio-03.jpg">
+            <div class="servicio-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></div>
+            <div class="servicio-item-text">
+              <div class="servicio-item-title">Energía Solar Fotovoltaica</div>
+              <p class="servicio-item-desc">Diseño, construcción, mantenimiento y operación de sistemas de <strong>energía solar fotovoltaica</strong> a la medida.</p>
+            </div>
+          </div>
+
+          <div class="servicio-item" data-img="servicio-04.jpg">
+            <div class="servicio-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+            <div class="servicio-item-text">
+              <div class="servicio-item-title">Obras Civiles</div>
+              <p class="servicio-item-desc">Diseño y ejecución de movimientos de tierra, <strong>vías y edificaciones</strong> asociadas a infraestructura energética e industrial.</p>
+            </div>
+          </div>
+
+          <div class="servicio-item" data-img="servicio-05.jpg">
+            <div class="servicio-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div class="servicio-item-text">
+              <div class="servicio-item-title">Redes Sanitarias e Hidráulicas</div>
+              <p class="servicio-item-desc">Diseño y construcción de redes sanitarias, hidráulicas y <strong>sistemas contra incendio</strong> para instalaciones industriales y energéticas.</p>
+            </div>
+          </div>
+
+          <div class="servicio-item" data-img="servicio-06.jpg">
+            <div class="servicio-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="2" x2="12" y2="22"/><path d="M5 6l7-4 7 4M5 18l7 4 7-4M2 10h20M2 14h20"/></svg></div>
+            <div class="servicio-item-text">
+              <div class="servicio-item-title">Torres de Transmisión</div>
+              <p class="servicio-item-desc">Mantenimiento de torres de transmisión de <strong>energía eléctrica</strong> y de <strong>telecomunicaciones</strong> en todo el territorio nacional.</p>
+            </div>
+          </div>
+
+          <div class="servicio-item" data-img="servicio-07.jpg">
+            <div class="servicio-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+            <div class="servicio-item-text">
+              <div class="servicio-item-title">Consultoría e Interventoría</div>
+              <p class="servicio-item-desc">Consultorías, interventoría y gestión comercial para empresas de <strong>servicios públicos</strong>. Venta de equipos eléctricos especializados.</p>
+            </div>
+          </div>
+
+        </div><!-- /servicios-list -->
+
+        <!-- Panel de imagen -->
+        <div class="servicios-img-panel">
+          <img id="serviciosPreviewImg" src="servicio-01.jpg" alt="Servicio LINCI"
+               onerror="this.style.background='#01435e'" />
+        </div>
+
+      </div><!-- /servicios-list-wrap -->
+
+    </div>
+  </section>
+
+  <!-- ==================== CERTIFICACIONES ==================== -->
+  <section id="certificaciones" class="section section--soft">
+    <div class="container">
+      <div class="cert-inner">
+        <div class="cert-text">
+          <p class="section-label">Calidad Certificada</p>
+          <h2 class="section-title">Comprometidos con<br>los <span>Más Altos</span> Estándares</h2>
+          <p class="section-body">
+            En LINCI estamos comprometidos con nuestro sistema de gestión integral de calidad,
+            seguridad industrial, salud ocupacional y medio ambiente (HSEQ). Identificamos, evaluamos
+            y controlamos los riesgos e impactos socioambientales, cumpliendo siempre con las
+            disposiciones legales vigentes.
+          </p>
+          <a href="#contacto" class="btn btn-outline">Solicitar Información</a>
+        </div>
+
+        <div class="cert-badges">
+          <div class="cert-badge">
+            <div class="cert-badge-norm">ISO 9001</div>
+            <div class="cert-badge-name">Sistema de Gestión de Calidad</div>
+            <div class="cert-badge-year">Vigente · Applus / ONAC</div>
+          </div>
+          <div class="cert-badge">
+            <div class="cert-badge-norm">ISO 45001</div>
+            <div class="cert-badge-name">Seguridad y Salud en el Trabajo</div>
+            <div class="cert-badge-year">Vigente · Applus / ONAC</div>
+          </div>
+          <div class="cert-badge">
+            <div class="cert-badge-norm">ISO 14001</div>
+            <div class="cert-badge-name">Gestión Ambiental</div>
+            <div class="cert-badge-year">Vigente · Applus / ONAC</div>
+          </div>
+          <div class="cert-badge">
+            <div class="cert-badge-norm">PMI®</div>
+            <div class="cert-badge-name">Gestión de Proyectos</div>
+            <div class="cert-badge-year">Certificación Internacional</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== EXPERIENCIA ==================== -->
+  <section id="experiencia" class="section">
+    <div class="container">
+      <div class="exp-header">
+        <div>
+          <p class="section-label">Nuestra Experiencia</p>
+          <h2 class="section-title">Proyectos que<br><span>Hablan</span> por Nosotros</h2>
+        </div>
+        <div class="exp-controls">
+          <button class="exp-btn" id="prevBtn" aria-label="Anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="exp-btn" id="nextBtn" aria-label="Siguiente">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="carousel-track-wrap">
+        <div class="carousel-track" id="carouselTrack">
+          <!-- PLACEHOLDER: reemplazar cada exp-0N.jpg con fotos reales de proyectos -->
+
+          <div class="exp-slide">
+            <img src="exp-01.jpg" alt="TRANSELCA – Barranquilla" onerror="this.style.background='#01354b'" />
+            <div class="exp-slide-overlay">
+              <div class="exp-slide-caption">
+                <div class="exp-slide-client">TRANSELCA S.A. E.S.P</div>
+                <div class="exp-slide-desc">Infraestructura eléctrica 13,2 kV y alumbrado LED, Lago Alto Etapa 1 — Barranquilla</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="exp-slide">
+            <img src="exp-02.jpg" alt="ELECTRICARIBE – Proyectos" onerror="this.style.background='#01435e'" />
+            <div class="exp-slide-overlay">
+              <div class="exp-slide-caption">
+                <div class="exp-slide-client">ELECTRICARIBE</div>
+                <div class="exp-slide-desc">Energización zonas rurales y construcción línea 34,5 kV Gambote – Mahates, Bolívar</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="exp-slide">
+            <img src="exp-03.jpg" alt="CERREJÓN – Torres telecom" onerror="this.style.background='#014d6e'" />
+            <div class="exp-slide-overlay">
+              <div class="exp-slide-caption">
+                <div class="exp-slide-client">CERREJÓN LTDA.</div>
+                <div class="exp-slide-desc">Mantenimiento de torres de telecomunicaciones en el Complejo Carbonífero del Cerrejón</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="exp-slide">
+            <img src="exp-04.jpg" alt="ECOPETROL – Chichimene" onerror="this.style.background='#01354b'" />
+            <div class="exp-slide-overlay">
+              <div class="exp-slide-caption">
+                <div class="exp-slide-client">ECOPETROL</div>
+                <div class="exp-slide-desc">Construcción troncal eléctrica campo Chichimene y centro de distribución — Acacías, Meta</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="exp-slide">
+            <img src="exp-05.jpg" alt="GESTIÓN ENERGÉTICA – Galapa" onerror="this.style.background='#01435e'" />
+            <div class="exp-slide-overlay">
+              <div class="exp-slide-caption">
+                <div class="exp-slide-client">GESTIÓN ENERGÉTICA S.A. ESP</div>
+                <div class="exp-slide-desc">Subestación eléctrica Galapa 10 MVA – 34,5/13,8 kV, departamento del Atlántico</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="exp-slide">
+            <img src="exp-06.jpg" alt="GOBERNACIÓN DE CÓRDOBA" onerror="this.style.background='#014d6e'" />
+            <div class="exp-slide-overlay">
+              <div class="exp-slide-caption">
+                <div class="exp-slide-client">GOBERNACIÓN DE CÓRDOBA</div>
+                <div class="exp-slide-desc">Línea 34,5 kV Tierralta – Valencia y subestación Valencia — Córdoba</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Clientes logo grid -->
+      <p class="clients-title">Han confiado en nosotros</p>
+      <div class="clients-grid">
+        <div class="client-logo">Transelca</div>
+        <div class="client-logo">Electricaribe</div>
+        <div class="client-logo">Cerrejón</div>
+        <div class="client-logo">Ecopetrol</div>
+        <div class="client-logo">Grupo Argos</div>
+        <div class="client-logo">Termoflores</div>
+        <div class="client-logo">Termonorte</div>
+        <div class="client-logo">EMCALI</div>
+        <div class="client-logo">DISPAC</div>
+        <div class="client-logo">EMSA</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== COBERTURA ==================== -->
+  <section id="cobertura" class="section section--dark">
+    <div class="container">
+      <div class="cobertura-grid">
+        <div>
+          <p class="section-label">Dónde Operamos</p>
+          <h2 class="section-title section-title--white">Cobertura<br><span>Nacional</span> e<br>Internacional</h2>
+          <p class="section-body section-body--white" style="margin: 1.25rem 0 2rem;">
+            Con sede principal en Barranquilla, operamos en todo el territorio colombiano
+            y contamos con presencia en Ciudad de Panamá, atendiendo proyectos
+            en los sectores energético, industrial, minero y de telecomunicaciones.
+          </p>
+          <div class="cobertura-list">
+            <div class="cobertura-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <div><strong>Sede Principal</strong> <span>Carrera 57 #99A-65, Barranquilla, Atlántico</span></div>
+            </div>
+            <div class="cobertura-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <div><strong>Oficina Bogotá</strong> <span>Mosquera, Cundinamarca</span></div>
+            </div>
+            <div class="cobertura-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+              <div><strong>Presencia Internacional</strong> <span>Ciudad de Panamá</span></div>
+            </div>
+            <div class="cobertura-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6l11-4 11 4-11 4L1 6z"/><path d="M1 6v8M23 6v8"/></svg>
+              <div><strong>Cobertura Nacional</strong> <span>Atlántico, Bolívar, Córdoba, Meta, Valle del Cauca y más</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cobertura-map">
+          <!-- PLACEHOLDER: reemplazar con mapa real o imagen de cobertura -->
+          <div class="cobertura-map-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <p>Mapa de cobertura<br><small>mapa-cobertura.jpg</small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACTO ==================== -->
+  <section id="contacto">
+    <div class="container">
+
+      <div class="contacto-head">
+        <p class="section-label">Contáctanos</p>
+        <h2 class="section-title">Somos Tu <span>Mejor Aliado</span> en Ingeniería</h2>
+        <p class="section-body">Cuéntanos sobre tu proyecto y te contactamos a la brevedad.</p>
+      </div>
+
+      <div class="contacto-items">
+        <div class="contacto-item">
+          <div class="contacto-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.29 6.29l1.42-1.42a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div class="contacto-item-text">
+            <strong>Teléfono / WhatsApp</strong>
+            <a href="tel:+573233334569">+57 323 333 4569</a>
+          </div>
+        </div>
+
+        <div class="contacto-item">
+          <div class="contacto-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="contacto-item-text">
+            <strong>Correo Electrónico</strong>
+            <a href="mailto:comercial@lincisa.com?subject=Consulta%20de%20proyecto%20LINCI">comercial@lincisa.com</a>
+          </div>
+        </div>
+
+        <div class="contacto-item">
+          <div class="contacto-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="contacto-item-text">
+            <strong>Dirección</strong>
+            <span>Carrera 57 #99A-65<br>Barranquilla, Atlántico</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contacto-cta">
+        <a href="mailto:comercial@lincisa.com?subject=Consulta%20de%20proyecto%20LINCI" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Contáctanos por Correo
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#hero" class="footer-logo">
+            <!-- PLACEHOLDER: reemplazar con img src="logo-dark.png" -->
+            <img src="logo-dark.png" alt="LINCI"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+            <span style="display:none; font-family:'Barlow Condensed',sans-serif; font-size:1.8rem; font-weight:800; color:#fff;">LINCI</span>
+          </a>
+          <p>
+            Ingeniería y Líneas LINCI S.A.S — Más de 20 años desarrollando infraestructura
+            eléctrica, civil y mecánica con excelencia y compromiso.
+          </p>
+          <div class="footer-social">
+            <!-- PLACEHOLDER: actualizar href con links reales de redes sociales -->
+            <a href="#" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="https://wa.me/573233334569" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="#about">Quiénes Somos</a></li>
+            <li><a href="#mision-vision">Misión y Visión</a></li>
+            <li><a href="#valores">Valores</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#certificaciones">Certificaciones</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="#servicios">Redes Eléctricas</a></li>
+            <li><a href="#servicios">Subestaciones</a></li>
+            <li><a href="#servicios">Energía Solar</a></li>
+            <li><a href="#servicios">Obras Civiles</a></li>
+            <li><a href="#servicios">Consultoría</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="tel:+573233334569">+57 323 333 4569</a></li>
+            <li><a href="mailto:comercial@lincisa.com">comercial@lincisa.com</a></li>
+            <li><a href="#cobertura">Barranquilla, Atlántico</a></li>
+            <li><a href="#cobertura">Bogotá / Mosquera</a></li>
+            <li><a href="#cobertura">Ciudad de Panamá</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 Ingeniería y Líneas LINCI S.A.S — NIT 802.016.590-3</p>
+        <p>Diseñado con ♥ por <a href="#">TGBS</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== JS ==================== -->
+  <script>
+    // ---- NAV scroll ----
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // ---- Mobile menu ----
+    const toggle = document.getElementById('navToggle');
+    const mobile = document.getElementById('navMobile');
+    toggle.addEventListener('click', () => {
+      mobile.classList.toggle('open');
+    });
+    mobile.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => mobile.classList.remove('open'));
+    });
+
+    // ---- Hero animated word ----
+    (function heroWordCycle() {
+      const el = document.getElementById('heroWord');
+      if (!el) return;
+      const words = ['Energiza', 'Transforma', 'Conecta', 'Impulsa', 'Ilumina'];
+      let idx = 0;
+
+      function nextWord() {
+        // fade out & slide up
+        el.classList.add('out');
+
+        setTimeout(function() {
+          idx = (idx + 1) % words.length;
+          el.textContent = words[idx];
+          // reset to bottom-enter state (invisible, below)
+          el.classList.remove('out');
+          el.classList.add('in');
+
+          // trigger reflow so transition fires
+          void el.offsetWidth;
+
+          // fade in (remove 'in' so it transitions to normal state)
+          el.classList.remove('in');
+        }, 380);
+      }
+
+      setInterval(nextWord, 2800);
+    })();
+
+    // ---- Misión/Visión accordion ----
+    function toggleMV(id) {
+      const item = document.getElementById(id);
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.mv-item').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    // ---- Constellation ----
+    (function buildConstellation() {
+      const wrap = document.getElementById('constellation');
+      const svg  = document.getElementById('constSvg');
+      if (!wrap || !svg) return;
+
+      const nodes = Array.from(wrap.querySelectorAll('.valor-node'));
+      const edges = [[0,1],[1,2],[0,3],[1,4],[2,5],[3,4],[4,5],[3,6],[4,7],[5,8],[6,7],[7,8]];
+
+      function getPos(node) {
+        return { x: parseFloat(node.dataset.x), y: parseFloat(node.dataset.y) };
+      }
+
+      function drawLines() {
+        svg.innerHTML = '';
+        edges.forEach(([a, b]) => {
+          const pa = getPos(nodes[a]);
+          const pb = getPos(nodes[b]);
+          const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          line.setAttribute('x1', pa.x); line.setAttribute('y1', pa.y);
+          line.setAttribute('x2', pb.x); line.setAttribute('y2', pb.y);
+          line.setAttribute('class', 'const-line');
+          svg.appendChild(line);
+        });
+      }
+
+      function positionNodes() {
+        const W = wrap.offsetWidth;
+        const H = wrap.offsetHeight;
+        nodes.forEach(node => {
+          node.style.left = (parseFloat(node.dataset.x) / 100 * W) + 'px';
+          node.style.top  = (parseFloat(node.dataset.y) / 100 * H) + 'px';
+        });
+      }
+
+      positionNodes(); drawLines();
+      window.addEventListener('resize', () => { positionNodes(); drawLines(); }, { passive: true });
+    })();
+
+    // ---- Servicios list hover image ----
+    (function initServiciosList() {
+      const items = document.querySelectorAll('#serviciosList .servicio-item');
+      const img   = document.getElementById('serviciosPreviewImg');
+      if (!items.length || !img) return;
+
+      items.forEach(item => {
+        item.addEventListener('mouseenter', function () {
+          items.forEach(i => i.classList.remove('active'));
+          this.classList.add('active');
+          const src = this.dataset.img;
+          if (img.getAttribute('src') === src) return;
+          img.style.opacity = '0';
+          setTimeout(() => {
+            img.src = src;
+            img.style.opacity = '1';
+          }, 220);
+        });
+      });
+    })();
+
+    // ---- Experience Carousel ----
+    const track = document.getElementById('carouselTrack');
+    const slides = track.querySelectorAll('.exp-slide');
+    let current = 0;
+
+    function getVisible() {
+      return window.innerWidth <= 768 ? 1 : 3;
+    }
+
+    function getSlideWidth() {
+      const gap = 24;
+      const visible = getVisible();
+      const totalGaps = (visible - 1) * gap;
+      return (track.parentElement.offsetWidth - totalGaps) / visible;
+    }
+
+    function updateCarousel(idx) {
+      const visible = getVisible();
+      const max = slides.length - visible;
+      current = Math.max(0, Math.min(idx, max));
+      const slideW = getSlideWidth();
+      const gap = 24;
+      track.style.transform = `translateX(-${current * (slideW + gap)}px)`;
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', () => updateCarousel(current - 1));
+    document.getElementById('nextBtn').addEventListener('click', () => updateCarousel(current + 1));
+    window.addEventListener('resize', () => updateCarousel(current), { passive: true });
+
+    // Auto-advance every 5s
+    setInterval(() => {
+      const visible = getVisible();
+      const max = slides.length - visible;
+      updateCarousel(current >= max ? 0 : current + 1);
+    }, 5000);
+  </script>
+
+</body>
+</html>
