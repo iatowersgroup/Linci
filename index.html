@@ -594,10 +594,92 @@
     }
 
     /* ============================================
-       VALORES — CONSTELACIÓN
+       VALORES — PALABRAS FLOTANTES
     ============================================ */
-    #valores { background: #020e14; }
-    #valores .section-title { color: var(--white); }
+    /* ===== VALORES — carrusel vertical ===== */
+    #valores { background: #020e14; padding: 48px 0; }
+
+    .valores-layout {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+    .valores-left {
+      flex: 0 0 auto;
+      max-width: 280px;
+    }
+    .valores-left .section-label { text-align: left; }
+    .valores-left .section-title {
+      color: var(--white);
+      text-align: left;
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      line-height: 1.2;
+      margin-bottom: 0;
+    }
+    .valores-left .section-title span { color: var(--blue); }
+
+    .valores-right {
+      flex: 1;
+      position: relative;
+      height: 180px;
+      overflow: hidden;
+    }
+    /* fade masks top & bottom */
+    .valores-right::before,
+    .valores-right::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      height: 56px;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .valores-right::before { top: 0;    background: linear-gradient(to bottom, #020e14 0%, transparent 100%); }
+    .valores-right::after  { bottom: 0; background: linear-gradient(to top,    #020e14 0%, transparent 100%); }
+
+    .valores-track {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      position: absolute;
+      width: 100%;
+      transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
+    }
+    .vcarousel-item {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.55rem 1.3rem;
+      border-radius: 100px;
+      border: 1px solid rgba(0,156,220,0.2);
+      background: rgba(0,156,220,0.06);
+      color: rgba(255,255,255,0.28);
+      display: inline-flex;
+      align-self: center;
+      white-space: nowrap;
+      transition: color 0.5s, border-color 0.5s, background 0.5s, opacity 0.5s;
+      user-select: none;
+    }
+    .vcarousel-item.active {
+      color: var(--white);
+      border-color: rgba(0,156,220,0.6);
+      background: rgba(0,156,220,0.13);
+    }
+    .vcarousel-item.near {
+      color: rgba(255,255,255,0.45);
+      border-color: rgba(0,156,220,0.3);
+    }
+
+    @media (max-width: 768px) {
+      .valores-layout { flex-direction: column; gap: 1.5rem; }
+      .valores-left { max-width: 100%; }
+      .valores-left .section-title { text-align: center; font-size: 1.5rem; }
+      .valores-left .section-label { text-align: center; }
+      .valores-right { width: 100%; }
+    }
 
     .constellation-wrap {
       position: relative;
@@ -946,50 +1028,113 @@
     .client-logo:hover { border-color: var(--blue); color: var(--blue); }
 
     /* ============================================
-       COBERTURA
+       COBERTURA — rediseño compacto
     ============================================ */
-    #cobertura { background: var(--navy); }
-    .cobertura-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-    .cobertura-map {
-      border-radius: var(--radius);
+    #cobertura {
+      background: linear-gradient(160deg, #020e14 0%, #01354b 100%);
+      padding: 72px 0 64px;
+      position: relative;
       overflow: hidden;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.10);
-      height: 420px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
-    .cobertura-map-placeholder {
+    #cobertura::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,156,220,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,156,220,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+    .cobertura-head {
       text-align: center;
-      color: rgba(255,255,255,0.4);
+      margin-bottom: 3rem;
     }
-    .cobertura-map-placeholder svg { width: 64px; margin-bottom: 1rem; opacity: 0.5; }
-    .cobertura-map-placeholder p { font-size: 0.9rem; }
-    /* PLACEHOLDER — reemplazar por: <img src="mapa-cobertura.jpg" alt="Cobertura LINCI"> */
-
-    .cobertura-text .section-title { margin-bottom: 1.25rem; }
-    .cobertura-text .section-body { margin-bottom: 2rem; }
-
-    .cobertura-list { display: flex; flex-direction: column; gap: 0.75rem; }
-    .cobertura-item {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.85rem 1.25rem;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 8px;
+    .cobertura-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .cob-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(0,156,220,0.18);
+      border-radius: 14px;
+      padding: 1.6rem 1.2rem 1.4rem;
+      text-align: center;
+      transition: background 0.25s, border-color 0.25s, transform 0.25s;
+      position: relative;
+    }
+    .cob-card:hover {
+      background: rgba(0,156,220,0.10);
+      border-color: rgba(0,156,220,0.5);
+      transform: translateY(-4px);
+    }
+    .cob-ping {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: rgba(0,156,220,0.15);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem;
+      position: relative;
+    }
+    .cob-ping::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(0,156,220,0.4);
+      animation: cobping 2s ease-out infinite;
+    }
+    .cob-card:nth-child(2) .cob-ping::after { animation-delay: 0.5s; }
+    .cob-card:nth-child(3) .cob-ping::after { animation-delay: 1s; }
+    .cob-card:nth-child(4) .cob-ping::after { animation-delay: 1.5s; }
+    @keyframes cobping {
+      0%   { transform: scale(1);   opacity: 0.8; }
+      100% { transform: scale(2.4); opacity: 0; }
+    }
+    .cob-ping svg { width: 18px; color: var(--blue); }
+    .cob-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       color: var(--white);
+      margin-bottom: 0.4rem;
     }
-    .cobertura-item svg { width: 18px; flex-shrink: 0; color: var(--blue); }
-    .cobertura-item strong { font-weight: 600; }
-    .cobertura-item span { font-size: 0.88rem; color: rgba(255,255,255,0.70); }
+    .cob-detail {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.5;
+    }
+    .cobertura-depts {
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 1.75rem;
+    }
+    .cobertura-depts > p {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.9rem;
+    }
+    .dept-tags {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 0.5rem;
+    }
+    .dept-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      padding: 0.28rem 0.85rem;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 100px;
+    }
 
     /* ============================================
        CONTACTO
@@ -1138,6 +1283,7 @@
       .servicios-list-wrap { grid-template-columns: 1fr 300px; gap: 1.5rem; }
       .clients-grid { grid-template-columns: repeat(3, 1fr); }
       .footer-grid { grid-template-columns: 1fr 1fr; }
+      .cobertura-cards { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 768px) {
@@ -1399,77 +1545,32 @@
     </div>
   </section>
 
-  <!-- ==================== VALORES — CONSTELACIÓN ==================== -->
-  <section id="valores" class="section">
+  <!-- ==================== VALORES — carrusel vertical ==================== -->
+  <section id="valores">
     <div class="container">
-      <div style="text-align:center; max-width:600px; margin:0 auto 0">
-        <p class="section-label">Nuestros Valores</p>
-        <h2 class="section-title">Los Principios que<br><span>Guían</span> Nuestro Trabajo</h2>
-      </div>
+      <div class="valores-layout">
 
-      <!-- Constellation desktop -->
-      <div class="constellation-wrap" id="constellation">
-        <!-- SVG lines drawn by JS -->
-        <svg class="constellation-svg" id="constSvg" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
-
-        <!-- Nodes: data-x and data-y in % | label-left = label goes to left of dot -->
-        <div class="valor-node" data-x="13" data-y="16" data-id="n1">
-          <div class="valor-dot"></div>
-          <span class="valor-label">Resp. Social</span>
+        <!-- Izquierda: título -->
+        <div class="valores-left">
+          <p class="section-label">Nuestros Valores</p>
+          <h2 class="section-title">Los Principios<br>que <span>Guían</span><br>Nuestro Trabajo</h2>
         </div>
 
-        <div class="valor-node" data-x="42" data-y="8" data-id="n2">
-          <div class="valor-dot"></div>
-          <span class="valor-label">Respeto</span>
+        <!-- Derecha: carrusel vertical -->
+        <div class="valores-right">
+          <div class="valores-track" id="valoresTrack">
+            <span class="vcarousel-item">Respeto</span>
+            <span class="vcarousel-item">Innovación</span>
+            <span class="vcarousel-item">Excelencia</span>
+            <span class="vcarousel-item">Sostenibilidad</span>
+            <span class="vcarousel-item">Transparencia</span>
+            <span class="vcarousel-item">Trabajo en Equipo</span>
+            <span class="vcarousel-item">Integridad</span>
+            <span class="vcarousel-item">Ética Empresarial</span>
+            <span class="vcarousel-item">Resp. Social</span>
+          </div>
         </div>
 
-        <div class="valor-node label-left" data-x="78" data-y="14" data-id="n3">
-          <div class="valor-dot"></div>
-          <span class="valor-label">Innovación</span>
-        </div>
-
-        <div class="valor-node" data-x="26" data-y="50" data-id="n4">
-          <div class="valor-dot"></div>
-          <span class="valor-label">Trabajo en Equipo</span>
-        </div>
-
-        <div class="valor-node label-left" data-x="58" data-y="42" data-id="n5">
-          <div class="valor-dot"></div>
-          <span class="valor-label">Transparencia</span>
-        </div>
-
-        <div class="valor-node label-left" data-x="86" data-y="52" data-id="n6">
-          <div class="valor-dot"></div>
-          <span class="valor-label">Excelencia</span>
-        </div>
-
-        <div class="valor-node" data-x="18" data-y="82" data-id="n7">
-          <div class="valor-dot"></div>
-          <span class="valor-label">Sostenibilidad</span>
-        </div>
-
-        <div class="valor-node" data-x="48" data-y="88" data-id="n8">
-          <div class="valor-dot"></div>
-          <span class="valor-label">Ética Empresarial</span>
-        </div>
-
-        <div class="valor-node label-left" data-x="74" data-y="74" data-id="n9">
-          <div class="valor-dot"></div>
-          <span class="valor-label">Integridad</span>
-        </div>
-      </div>
-
-      <!-- Mobile fallback list -->
-      <div class="constellation-mobile">
-        <div class="constellation-mobile-item"><div class="constellation-mobile-dot"></div><div><div class="constellation-mobile-title">Responsabilidad Social</div><div class="constellation-mobile-desc">Comprometidos con las comunidades y el entorno.</div></div></div>
-        <div class="constellation-mobile-item"><div class="constellation-mobile-dot"></div><div><div class="constellation-mobile-title">Respeto</div><div class="constellation-mobile-desc">Valoramos a cada persona con dignidad y consideración.</div></div></div>
-        <div class="constellation-mobile-item"><div class="constellation-mobile-dot"></div><div><div class="constellation-mobile-title">Innovación</div><div class="constellation-mobile-desc">Adoptamos tecnologías modernas para soluciones eficientes.</div></div></div>
-        <div class="constellation-mobile-item"><div class="constellation-mobile-dot"></div><div><div class="constellation-mobile-title">Trabajo en Equipo</div><div class="constellation-mobile-desc">Colaboramos con sinergia para superar expectativas.</div></div></div>
-        <div class="constellation-mobile-item"><div class="constellation-mobile-dot"></div><div><div class="constellation-mobile-title">Transparencia</div><div class="constellation-mobile-desc">Honestidad y claridad en todas nuestras relaciones.</div></div></div>
-        <div class="constellation-mobile-item"><div class="constellation-mobile-dot"></div><div><div class="constellation-mobile-title">Excelencia</div><div class="constellation-mobile-desc">Calidad máxima en cada etapa de nuestros proyectos.</div></div></div>
-        <div class="constellation-mobile-item"><div class="constellation-mobile-dot"></div><div><div class="constellation-mobile-title">Sostenibilidad</div><div class="constellation-mobile-desc">Criterios ambientales y sociales en cada decisión.</div></div></div>
-        <div class="constellation-mobile-item"><div class="constellation-mobile-dot"></div><div><div class="constellation-mobile-title">Ética Empresarial</div><div class="constellation-mobile-desc">Cumplimos las normas legales y morales de nuestra actividad.</div></div></div>
-        <div class="constellation-mobile-item"><div class="constellation-mobile-dot"></div><div><div class="constellation-mobile-title">Integridad</div><div class="constellation-mobile-desc">Coherencia entre principios, decisiones y acciones.</div></div></div>
       </div>
     </div>
   </section>
@@ -1687,61 +1788,66 @@
         </div>
       </div>
 
-      <!-- Clientes logo grid -->
-      <p class="clients-title">Han confiado en nosotros</p>
-      <div class="clients-grid">
-        <div class="client-logo">Transelca</div>
-        <div class="client-logo">Electricaribe</div>
-        <div class="client-logo">Cerrejón</div>
-        <div class="client-logo">Ecopetrol</div>
-        <div class="client-logo">Grupo Argos</div>
-        <div class="client-logo">Termoflores</div>
-        <div class="client-logo">Termonorte</div>
-        <div class="client-logo">EMCALI</div>
-        <div class="client-logo">DISPAC</div>
-        <div class="client-logo">EMSA</div>
-      </div>
     </div>
   </section>
 
   <!-- ==================== COBERTURA ==================== -->
-  <section id="cobertura" class="section section--dark">
+  <section id="cobertura">
     <div class="container">
-      <div class="cobertura-grid">
-        <div>
-          <p class="section-label">Dónde Operamos</p>
-          <h2 class="section-title section-title--white">Cobertura<br><span>Nacional</span> e<br>Internacional</h2>
-          <p class="section-body section-body--white" style="margin: 1.25rem 0 2rem;">
-            Con sede principal en Barranquilla, operamos en todo el territorio colombiano
-            y contamos con presencia en Ciudad de Panamá, atendiendo proyectos
-            en los sectores energético, industrial, minero y de telecomunicaciones.
-          </p>
-          <div class="cobertura-list">
-            <div class="cobertura-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              <div><strong>Sede Principal</strong> <span>Carrera 57 #99A-65, Barranquilla, Atlántico</span></div>
-            </div>
-            <div class="cobertura-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              <div><strong>Oficina Bogotá</strong> <span>Mosquera, Cundinamarca</span></div>
-            </div>
-            <div class="cobertura-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
-              <div><strong>Presencia Internacional</strong> <span>Ciudad de Panamá</span></div>
-            </div>
-            <div class="cobertura-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6l11-4 11 4-11 4L1 6z"/><path d="M1 6v8M23 6v8"/></svg>
-              <div><strong>Cobertura Nacional</strong> <span>Atlántico, Bolívar, Córdoba, Meta, Valle del Cauca y más</span></div>
-            </div>
+      <div class="cobertura-head">
+        <p class="section-label">Dónde Operamos</p>
+        <h2 class="section-title section-title--white">Cobertura <span>Nacional</span> e Internacional</h2>
+      </div>
+
+      <div class="cobertura-cards">
+        <div class="cob-card">
+          <div class="cob-ping">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           </div>
+          <div class="cob-title">Sede Principal</div>
+          <div class="cob-detail">Barranquilla<br>Atlántico, Colombia</div>
         </div>
 
-        <div class="cobertura-map">
-          <!-- PLACEHOLDER: reemplazar con mapa real o imagen de cobertura -->
-          <div class="cobertura-map-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <p>Mapa de cobertura<br><small>mapa-cobertura.jpg</small></p>
+        <div class="cob-card">
+          <div class="cob-ping">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           </div>
+          <div class="cob-title">Oficina Bogotá</div>
+          <div class="cob-detail">Mosquera<br>Cundinamarca, Colombia</div>
+        </div>
+
+        <div class="cob-card">
+          <div class="cob-ping">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+          </div>
+          <div class="cob-title">Internacional</div>
+          <div class="cob-detail">Ciudad de Panamá<br>República de Panamá</div>
+        </div>
+
+        <div class="cob-card">
+          <div class="cob-ping">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="cob-title">+15 Departamentos</div>
+          <div class="cob-detail">Proyectos activos<br>en todo Colombia</div>
+        </div>
+      </div>
+
+      <div class="cobertura-depts">
+        <p>Presencia en departamentos</p>
+        <div class="dept-tags">
+          <span class="dept-tag">Atlántico</span>
+          <span class="dept-tag">Bolívar</span>
+          <span class="dept-tag">Córdoba</span>
+          <span class="dept-tag">Meta</span>
+          <span class="dept-tag">Valle del Cauca</span>
+          <span class="dept-tag">Cundinamarca</span>
+          <span class="dept-tag">Cesar</span>
+          <span class="dept-tag">Magdalena</span>
+          <span class="dept-tag">La Guajira</span>
+          <span class="dept-tag">Sucre</span>
+          <span class="dept-tag">Antioquia</span>
+          <span class="dept-tag">Nariño</span>
         </div>
       </div>
     </div>
@@ -1889,6 +1995,33 @@
     mobile.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => mobile.classList.remove('open'));
     });
+
+    // ---- Valores — carrusel vertical ----
+    (function valoresCarousel() {
+      const track = document.getElementById('valoresTrack');
+      if (!track) return;
+      const items = Array.from(track.querySelectorAll('.vcarousel-item'));
+      const ITEM_H = 52; // px per item (height + gap)
+      let current = 0;
+
+      function update() {
+        items.forEach((el, i) => {
+          el.classList.remove('active', 'near');
+          const dist = Math.abs(i - current);
+          if (dist === 0) el.classList.add('active');
+          else if (dist === 1) el.classList.add('near');
+        });
+        // center the active item in the 180px window (top of window + 90px - half item height ~20px)
+        const offset = 90 - 20 - current * ITEM_H;
+        track.style.transform = `translateY(${offset}px)`;
+      }
+
+      update();
+      setInterval(() => {
+        current = (current + 1) % items.length;
+        update();
+      }, 1800);
+    })();
 
     // ---- Hero animated word ----
     (function heroWordCycle() {
