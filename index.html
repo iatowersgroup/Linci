@@ -292,7 +292,7 @@
     .hero-word-wrap {
       display: inline-block;
       position: relative;
-      min-width: 260px;
+      min-width: min(260px, 60vw);
     }
     .hero-word {
       display: inline-block;
@@ -1290,37 +1290,69 @@
     }
 
     @media (max-width: 768px) {
-      .section { padding: 64px 0; }
-      #hero { height: 70vh; min-height: 480px; }
+      .section { padding: 56px 0; }
+      .container { padding: 0 1rem; }
+      #hero { height: 100svh; min-height: 520px; }
 
       .nav-links, .nav-cta { display: none; }
       .nav-toggle { display: flex; }
 
+      /* Hero */
+      .hero-content { padding-top: 2rem; }
+      .hero-word-wrap { min-width: 0; display: inline; }
+      .hero-eyebrow { font-size: 0.75rem; letter-spacing: 0.14em; white-space: normal; }
+      .hero-title { font-size: clamp(2.4rem, 10vw, 3.5rem); }
+      .hero-sub { font-size: 1rem; }
+      .hero-actions { flex-direction: column; align-items: flex-start; }
+      .hero-actions .btn { width: 100%; justify-content: center; }
+
+      /* Stats */
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
       .stat-item { border-bottom: 1px solid rgba(255,255,255,0.2); }
       .stat-item:nth-child(even) { border-right: none; }
 
-      #about .about-grid { grid-template-columns: 1fr; }
+      /* About */
+      #about .about-grid { grid-template-columns: 1fr; gap: 2rem; }
       .about-image-wrap { order: -1; }
-      .about-image-wrap img { height: 280px; }
+      .about-image-wrap img { height: 260px; }
       .about-image-badge { display: none; }
 
-      .mv-grid { grid-template-columns: 1fr; }
+      /* Misión / Visión */
+      .mv-trigger { gap: 0.75rem; }
+      .mv-tag { display: none; }
 
+      /* Servicios */
       .servicios-list-wrap { grid-template-columns: 1fr; }
       .servicios-img-panel { display: none; }
+      .servicios-header .section-body { font-size: 0.95rem; }
 
+      /* Certificaciones */
       .cert-inner { flex-direction: column; gap: 2rem; }
-      .exp-slide { min-width: calc(100% - 0px); }
+      .cert-badges { gap: 1rem; }
 
-      .cobertura-grid { grid-template-columns: 1fr; }
-      .cobertura-map { display: none; }
+      /* Experiencia */
+      .exp-slide { min-width: calc(100vw - 2rem); }
+      #experiencia .exp-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
 
-      .contacto-grid { max-width: 100%; }
+      /* Cobertura */
+      .cobertura-cards { grid-template-columns: repeat(2, 1fr); }
+
+      /* Contacto — FIX: clase real es contacto-items, no contacto-grid */
+      .contacto-items { grid-template-columns: 1fr; }
 
       .clients-grid { grid-template-columns: repeat(2, 1fr); }
       .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
       .footer-bottom { flex-direction: column; text-align: center; }
+    }
+
+    /* Pantallas muy pequeñas (< 400px) */
+    @media (max-width: 400px) {
+      .section { padding: 48px 0; }
+      .hero-title { font-size: clamp(2rem, 11vw, 3rem); }
+      .stat-number { font-size: 2.2rem; }
+      .cobertura-cards { grid-template-columns: 1fr; }
+      .btn { font-size: 0.9rem; padding: 0.75rem 1.25rem; }
+      .section-title { font-size: clamp(1.6rem, 7vw, 2.4rem); }
     }
   </style>
 </head>
